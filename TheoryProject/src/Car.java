@@ -10,7 +10,12 @@ class Car extends Maintenance {
 	// we can access Current time by timeNow
 	
 	
-	Info info = new Info();
+	Info info;
+
+	Car(Info info) {
+		this.info = info;
+	}
+
    @Override
    public String TyreRotationHistory() {
    	int lastTyreRotated = info.getLastMileForRotation();
@@ -44,11 +49,11 @@ class Car extends Maintenance {
    @Override
    public String EngineOilIsDue() {
 	   int range = 5000;
-	   if((info.odometer - info.getLastMileForRotation()) > range) {
+	   if((info.odometer - info.getLastMileForOil()) > range) {
 		   return "Engine Oil Change is Due";
 	   }
 	   else {
-		   int gap = (info.getLastMileForRotation() + range) - info.odometer ;
+		   int gap = (info.getLastMileForOil() + range) - info.odometer ;
 		   return "Next change after " + gap;
 	   }
    }
@@ -93,4 +98,3 @@ class Car extends Maintenance {
 	//1)current time -> currentDate
 	//2)current mileage -> currentMilage
 	// currentMilage lastMile lastDate currentDate
-
